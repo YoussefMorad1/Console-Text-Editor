@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Youssef/CLionProjects/Assingment4
+# Install script for directory: C:/Users/Youssef/Documents/GitHub/Console-Text-Editor
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Youssef/CLionProjects/Assingment4/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/Youssef/Documents/GitHub/Console-Text-Editor/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
