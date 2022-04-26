@@ -5,8 +5,13 @@
 
 using namespace std;
 
+// Loading file Function
 void load_file();
 
+// Additional functions used repeatedly
+string tolower(string str);
+
+// The Menu Functions
 void append();
 
 void display();
@@ -44,6 +49,7 @@ int main() {
 
     load_file();
 
+    cout << '\n';
     while(true){
         cout << "1. Add new text to the end of the file\n"
                 "2. Display the content of the file\n"
@@ -103,9 +109,13 @@ int main() {
             save();
         else if(option == "16")
             return 0;
+
+        cout << "\n_______________________________________________\n\n";
     }
 }
 
+
+// Loading file Function
 void load_file(){
     cout << "Please enter the txt-file name you want to deal with:\n";
 
@@ -131,6 +141,17 @@ void load_file(){
 
 }
 
+// Additional functions used repeatedly
+string tolower(string str){
+    for(int i = 0; i < str.length(); i++){
+        if(isalpha(str[i])) {
+            str[i] = tolower(str[i]);
+        }
+    }
+    return str;
+}
+
+// The Menu Functions
 void append(){}
 
 void display(){}
@@ -151,7 +172,31 @@ void count_lines(){}
 
 void search_word(){}
 
-void word_freq(){}
+void word_freq(){
+    cout << "\nEnter the word to count how many times it exists in the file\n>>";
+
+    // entering the word to count its frequency
+    string word;
+    cin.ignore();
+    cin.sync();
+    getline(cin, word);
+
+    string temp_word;
+    long long word_counter = 0;
+
+    while(!file.eof()){ //while didn't reach End Of File
+        // putting every word in a string
+        file >> temp_word;
+
+        // increasing if this word is the word we're looking for
+        if(tolower(temp_word) == tolower(word)) {
+            word_counter++;
+        }
+
+    }
+
+    cout << "The word (" << word << ") exists: " << word_counter << " Times\n";
+}
 
 void make_upper(){}
 
