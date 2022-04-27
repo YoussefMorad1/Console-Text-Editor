@@ -9,11 +9,23 @@ void load_file();
 void counting_words();
 
 string tolower(string str);
+string totitle(string str){
+    istringstream line(str);
+
+    string temp_word;
+    string new_str;
+    while(!line.eof()){
+        line >> temp_word;
+        temp_word[0] = toupper(temp_word[0]);
+        new_str += temp_word;
+    }
+}
 
 fstream file;
 
 int main(){
-    load_file();
+    totitle("youssef morad mohamed");
+
 }
 
 void load_file(){

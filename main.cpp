@@ -1,15 +1,20 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
+#include <sstream>
 #include <regex>
 
 using namespace std;
 
 // Loading file Function
 void load_file();
+void make_recovery_string();
 
 // Additional functions used repeatedly
 string tolower(string str);
+string toupper(string str);
+string totitle(string str);
+void str_to_file(string str);
 
 // The Menu Functions
 void append();
@@ -40,9 +45,13 @@ void make_lower();
 
 void make_title();
 
-void save();
+void main_save();
+void save_recovery_file();
+void save_file_into_new();
 
 fstream file;
+string str_of_recovery;
+char filename[100];
 
 int main() {
     cout << "Welcome User!\n";
@@ -106,21 +115,21 @@ int main() {
         else if(option == "14")
             make_title();
         else if(option == "15")
-            save();
-        else if(option == "16")
+            main_save();
+        else if(option == "16"){
             return 0;
+        }
 
         cout << "\n_______________________________________________\n\n";
     }
 }
 
 
-// Loading file Function
+// Loading file Function and Getting recovery of it
 void load_file(){
     cout << "Please enter the txt-file name you want to deal with:\n";
 
     // taking the File name from user
-    char filename[100];
     cin >> filename;
 
     // adding the .txt extension
@@ -128,6 +137,9 @@ void load_file(){
 
     // trying to open the file in read-only mode (so I can check if it exists) (File-mode can be changed later)
     file.open(filename);
+
+    // holding a copy of the old file in a string, so if we want to recover it or not to overwrite it
+        make_recovery_string();
 
     if(file.fail()){ // checking if a file doesn't exist
         cout << "This is a new file. I created it for you :)\n";
@@ -139,7 +151,28 @@ void load_file(){
         cout << "This File Already Exists\n";
     }
 
+    // closing file temporally, so it's opened in the desired mood for every option
+    file.close();
 }
+
+void make_recovery_string(){
+
+    string temp_line;
+    bool first_line = true;
+    while(!file.eof()){
+        getline(file, temp_line);
+        if(first_line) {
+            str_of_recovery += temp_line;
+            first_line = false;
+        }
+        else {
+            str_of_recovery += '\n';
+            str_of_recovery += temp_line;
+        }
+    }
+
+}
+
 
 // Additional functions used repeatedly
 string tolower(string str){
@@ -150,6 +183,43 @@ string tolower(string str){
     }
     return str;
 }
+string toupper(string str){
+    for(int i = 0; i < str.length(); i++){
+        if(isalpha(str[i])) {
+            str[i] = toupper(str[i]);
+        }
+    }
+    return str;
+}
+string totitle(string str){
+    // taking the string we want to make title as input stream and call it line
+    istringstream line(str);
+
+    string temp_word;
+    string new_str;
+    while(line >> temp_word){ // get word from the line in temp_word
+
+        // make first char Upper and others Lower
+        temp_word[0] = toupper(temp_word[0]);
+        for(int i = 1; i < temp_word.length(); i++)
+            temp_word[i] = tolower(temp_word[i]);
+
+        // add the titled word to new string followed by space
+        new_str += temp_word;
+        new_str += ' ';
+    }
+
+    // return new line that is every word 1st char Upper
+    return new_str;
+}
+void str_to_file(string str){
+    file.close();
+    file.open(filename, ios::out);
+    file << str;
+    file.close();
+}
+
+
 
 // The Menu Functions
 void append(){}
@@ -173,6 +243,8 @@ void count_lines(){}
 void search_word(){}
 
 void word_freq(){
+    file.open(filename, ios::in);
+
     cout << "\nEnter the word to count how many times it exists in the file\n>>";
 
     // entering the word to count its frequency
@@ -198,10 +270,129 @@ void word_freq(){
     cout << "The word (" << word << ") exists: " << word_counter << " Times\n";
 }
 
-void make_upper(){}
+void make_upper(){
+    //open file in read mode to get words from it
+    file.open(filename);
 
-void make_lower(){}
+    string line, str_of_effect;
+    bool first_line = true;
+    while(!file.eof()){
+        // getting a line from the file and making it UPPER then saving it in a string (str_of_effect)
+        getline(file, line);
 
-void make_title(){}
+        if(first_line){
+            str_of_effect += toupper(line);
+            first_line = false;
+        }
+        else {
+            str_of_effect += '\n';
+            str_of_effect += toupper(line);
+        }
+    }
 
-void save(){}
+    // saving the string in the file
+    str_to_file(str_of_effect);
+}
+
+void make_lower(){
+    //open file in read mode to get words from it
+    file.open(filename);
+
+    string line, str_of_effect;
+    bool first_line = true;
+    while(!file.eof()){
+        // getting a line from the file and making it UPPER then saving it in a string (str_of_effect)
+        getline(file, line);
+
+        if(first_line){
+            str_of_effect += tolower(line);
+            first_line = false;
+        }
+        else {
+            str_of_effect += '\n';
+            str_of_effect += tolower(line);
+        }
+    }
+
+    // saving the string in the file
+    str_to_file(str_of_effect);
+}
+
+void make_title(){
+    //open file in read mode to get words from it
+    file.open(filename);
+
+    string line, str_of_effect;
+    bool first_line = true;
+    while(!file.eof()){
+        // getting a line from the file and making it UPPER then saving it in a string (str_of_effect)
+        getline(file, line);
+
+        if(first_line){
+            str_of_effect += totitle(line);
+            first_line = false;
+        }
+        else {
+            str_of_effect += '\n';
+            str_of_effect += totitle(line);
+        }
+    }
+
+    // saving the string in the file
+    str_to_file(str_of_effect);
+}
+
+void save_recovery_file(){
+    file.open(filename, ios::out);
+    str_to_file(str_of_recovery);
+    file.close();
+}
+
+void save_file_into_new(){
+    file.open(filename);
+    cout << "Please enter name to save your file with\n>>";
+
+    char new_file_name[100];
+    cin >> new_file_name;
+
+    fstream new_file;
+    new_file.open(new_file_name, ios::out);
+
+    string str_of_main_file, temp_line;
+    bool first_line = true;
+
+    while(!file.eof()){
+        getline(file, temp_line);
+
+        if(first_line) {
+            str_of_main_file += temp_line;
+            first_line = false;
+        }
+        else{
+            str_of_main_file += '\n';
+            str_of_main_file += temp_line;
+        }
+    }
+
+    new_file << str_of_main_file;
+    new_file.close();
+}
+
+void main_save(){
+    cout << "\n1. Save the file's content again in the same file\n2. Save the file's content under a different file name\n>>";
+
+    string choice;
+    cin >> choice;
+    while(choice != "1" && choice != "2"){
+        cout << "Please choose a valid option!\n>>";
+        cin >> choice;
+    }
+
+    if(choice == "1"){
+        file.close();
+    }
+    else if(choice == "2"){
+        save_file_into_new();
+        save_recovery_file();
+    }
+}
