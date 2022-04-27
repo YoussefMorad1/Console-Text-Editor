@@ -125,6 +125,8 @@ int main() {
 }
 
 
+
+
 // Loading file Function and Getting recovery of it
 void load_file(){
     cout << "Please enter the txt-file name you want to deal with:\n";
@@ -174,7 +176,12 @@ void make_recovery_string(){
 }
 
 
+//_______________________________________________
+//_______________________________________________
+
+
 // Additional functions used repeatedly
+
 string tolower(string str){
     for(int i = 0; i < str.length(); i++){
         if(isalpha(str[i])) {
@@ -183,6 +190,8 @@ string tolower(string str){
     }
     return str;
 }
+
+//_____________________________
 string toupper(string str){
     for(int i = 0; i < str.length(); i++){
         if(isalpha(str[i])) {
@@ -191,6 +200,8 @@ string toupper(string str){
     }
     return str;
 }
+
+//_____________________________
 string totitle(string str){
     // taking the string we want to make title as input stream and call it line
     istringstream line(str);
@@ -212,6 +223,8 @@ string totitle(string str){
     // return new line that is every word 1st char Upper
     return new_str;
 }
+
+//_____________________________
 void str_to_file(string str){
     file.close();
     file.open(filename, ios::out);
@@ -220,28 +233,42 @@ void str_to_file(string str){
 }
 
 
+//_______________________________________________
+//_______________________________________________
+
 
 // The Menu Functions
+
 void append(){}
 
+//_____________________________
 void display(){}
 
+//_____________________________
 void empty(){}
 
+//_____________________________
 void encrypt(){}
 
+//_____________________________
 void decrypt(){}
 
+//_____________________________
 void merge(){}
 
+//_____________________________
 void count_words(){}
 
+//_____________________________
 void count_chars(){}
 
+//_____________________________
 void count_lines(){}
 
+//_____________________________
 void search_word(){}
 
+//_____________________________
 void word_freq(){
     file.open(filename, ios::in);
 
@@ -270,6 +297,7 @@ void word_freq(){
     cout << "The word (" << word << ") exists: " << word_counter << " Times\n";
 }
 
+//_____________________________
 void make_upper(){
     //open file in read mode to get words from it
     file.open(filename);
@@ -290,10 +318,11 @@ void make_upper(){
         }
     }
 
-    // saving the string in the file
+    // saving the string in the file and closing it
     str_to_file(str_of_effect);
 }
 
+//_____________________________
 void make_lower(){
     //open file in read mode to get words from it
     file.open(filename);
@@ -314,10 +343,11 @@ void make_lower(){
         }
     }
 
-    // saving the string in the file
+    // saving the string in the file and closing it
     str_to_file(str_of_effect);
 }
 
+//_____________________________
 void make_title(){
     //open file in read mode to get words from it
     file.open(filename);
@@ -338,10 +368,11 @@ void make_title(){
         }
     }
 
-    // saving the string in the file
+    // saving the string in the file and closing it
     str_to_file(str_of_effect);
 }
 
+//_____________________________
 void save_recovery_file(){
     file.open(filename, ios::out);
     str_to_file(str_of_recovery);
@@ -358,23 +389,23 @@ void save_file_into_new(){
     fstream new_file;
     new_file.open(new_file_name, ios::out);
 
-    string str_of_main_file, temp_line;
+    string str_of_original_file, temp_line;
     bool first_line = true;
 
     while(!file.eof()){
         getline(file, temp_line);
 
         if(first_line) {
-            str_of_main_file += temp_line;
+            str_of_original_file += temp_line;
             first_line = false;
         }
         else{
-            str_of_main_file += '\n';
-            str_of_main_file += temp_line;
+            str_of_original_file += '\n';
+            str_of_original_file += temp_line;
         }
     }
 
-    new_file << str_of_main_file;
+    new_file << str_of_original_file;
     new_file.close();
 }
 
