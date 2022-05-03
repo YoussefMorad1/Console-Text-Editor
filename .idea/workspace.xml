@@ -58,11 +58,6 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager" selected="CMake Application.Assingment4">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Assignment4_testing" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Assingment4" TARGET_NAME="Assignment4_testing" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Assingment4" RUN_TARGET_NAME="Assignment4_testing">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -87,6 +82,8 @@
       <option name="presentableId" value="Default" />
       <updated>1650987037631</updated>
       <workItem from="1650987052509" duration="23471000" />
+      <workItem from="1651542667607" duration="1732000" />
+      <workItem from="1651545332045" duration="2722000" />
     </task>
     <servers />
   </component>

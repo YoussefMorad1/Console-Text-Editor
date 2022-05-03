@@ -1,4 +1,4 @@
-C:/Users/Youssef/Documents/GitHub/Console-Text-Editor/cmake-build-debug/CMakeFiles/Assingment4.dir
-C:/Users/Youssef/Documents/GitHub/Console-Text-Editor/cmake-build-debug/CMakeFiles/Assignment4_testing.dir
-C:/Users/Youssef/Documents/GitHub/Console-Text-Editor/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Youssef/Documents/GitHub/Console-Text-Editor/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+F:/FCAI/prog1/Console-Text-Editor/cmake-build-debug/CMakeFiles/Assingment4.dir
+F:/FCAI/prog1/Console-Text-Editor/cmake-build-debug/CMakeFiles/Assignment4_testing.dir
+F:/FCAI/prog1/Console-Text-Editor/cmake-build-debug/CMakeFiles/edit_cache.dir
+F:/FCAI/prog1/Console-Text-Editor/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -140,20 +140,24 @@ void load_file(){
     // trying to open the file in read-only mode (so I can check if it exists) (File-mode can be changed later)
     file.open(filename);
 
-    // holding a copy of the old file in a string, so if we want to recover it or not to overwrite it
-        make_recovery_string();
 
     if(file.fail()){ // checking if a file doesn't exist
         cout << "This is a new file. I created it for you :)\n";
 
         // creating a file with the name user entered if the file didn't exist (it opens in write mode)
         file.open(filename, ios::out);
+
+        // the recovery string will be empty as it's new file
+        str_of_recovery = "";
     }
     else{
         cout << "This File Already Exists\n";
+
+        // holding a copy of the old file in a string, so if we want to recover it or not to overwrite it
+        make_recovery_string();
     }
 
-    // closing file temporally, so it's opened in the desired mood for every option
+    // closing file temporally, so it's opened in the desired mode for every option
     file.close();
 }
 

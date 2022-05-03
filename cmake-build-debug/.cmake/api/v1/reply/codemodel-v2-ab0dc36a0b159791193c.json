@@ -58,8 +58,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/Youssef/Documents/GitHub/Console-Text-Editor/cmake-build-debug",
-		"source" : "C:/Users/Youssef/Documents/GitHub/Console-Text-Editor"
+		"build" : "F:/FCAI/prog1/Console-Text-Editor/cmake-build-debug",
+		"source" : "F:/FCAI/prog1/Console-Text-Editor"
 	},
 	"version" : 
 	{
