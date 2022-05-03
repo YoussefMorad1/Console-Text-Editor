@@ -23,9 +23,7 @@ void display();
 
 void empty();
 
-void encrypt();
-
-void decrypt();
+void encrypt_decrypt(int sign);
 
 void merge();
 
@@ -93,9 +91,9 @@ int main() {
         else if(option == "3")
             empty();
         else if(option == "4")
-            encrypt();
+            encrypt_decrypt(1);
         else if(option == "5")
-            decrypt();
+            encrypt_decrypt(-1);
         else if(option == "6")
             merge();
         else if(option == "7")
@@ -242,20 +240,71 @@ void str_to_file(string str){
 
 
 // The Menu Functions
+void append(){
+    string write;
 
-void append(){}
+    file.open(filename,ios::out | ios::app);//file opened //open file for writing
+    cout<<"write what you want to add it to the file"<<endl;
+    getline(cin,write,'\0');
+
+
+    if (cin.eof()){
+        cin.clear();
+        file << write;
+        cout<<"\n"<<"Your text has been added to the file successfully"<< endl ;
+        file.close();
+    }
+
+}
+
 
 //_____________________________
-void display(){}
+void display(){
+    file.open(filename);//file opened
+    char word[50];
+    file>>word;
+    cout<<word<<" ";
+    while(file.good()){
+
+        file>>word;
+        cout<<word<<" ";
+    }
+    cout<<endl;
+    file.close();
+}
 
 //_____________________________
-void empty(){}
+void empty(){
+    file.open(filename,ios::out);
+    file.close();
+    cout<<"Done"<<endl;
+    file.close();
+}
 
 //_____________________________
-void encrypt(){}
+//function to encrypt and decrypt file words
+void encrypt_decrypt(int sign){
 
-//_____________________________
-void decrypt(){}
+    file.open(filename);//file opened
+    string word;
+    char sp;
+    file>>word; //get first value from file
+    while(file.good()){
+
+        for(int i=0;i<word.length();i++) {
+            word[i] = word[i] + sign;
+            sp=32+sign;
+        }
+        cout<<word<<sp;
+        file>>word;
+
+    }
+    for(int i=0;i<word.length();i++) {
+        word[i] = word[i] + sign;}
+    cout<<word;
+    cout<<endl;
+    file.close();
+}
 
 //_____________________________
 void merge(){
@@ -281,7 +330,7 @@ void merge(){
             file << file2.rdbuf();
             cout << "Files merged successfully!\n";
             exist = true;
-        }   
+        }
     }
     file.close();
     file2.close();
