@@ -262,8 +262,6 @@ void append(){
 void display(){
     file.open(filename);//file opened
     string word;
-    file>>word;
-    cout<<word;
     while(getline(file,word,'\0')){
         file>>word;
         cout<<word;
