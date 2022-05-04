@@ -261,18 +261,16 @@ void append(){
 //_____________________________
 void display(){
     file.open(filename);//file opened
-    char word[50];
+    string word;
     file>>word;
-    cout<<word<<" ";
-    while(file.good()){
-
+    cout<<word;
+    while(getline(file,word,'\0')){
         file>>word;
-        cout<<word<<" ";
+        cout<<word;
     }
     cout<<endl;
     file.close();
 }
-
 //_____________________________
 void empty(){
     file.open(filename,ios::out);
