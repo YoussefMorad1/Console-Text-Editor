@@ -90,10 +90,12 @@ int main() {
             display();
         else if(option == "3")
             empty();
-        else if(option == "4")
+        else if(option == "4"){
             encrypt_decrypt(1);
-        else if(option == "5")
+            cout<<"File encrypted and secured"<<endl;}
+        else if(option == "5"){
             encrypt_decrypt(-1);
+            cout<<"File decrypted"<<endl;}
         else if(option == "6")
             merge();
         else if(option == "7")
@@ -280,26 +282,28 @@ void empty(){
 //_____________________________
 //function to encrypt and decrypt file words
 void encrypt_decrypt(int sign){
-
-    file.open(filename);//file opened
-    string word;
-    char sp;
-    file>>word; //get first value from file
-    while(file.good()){
+    string word,write;
+    //read from file
+    file.open(filename);
+    while(getline(file,word,'\0')){
 
         for(int i=0;i<word.length();i++) {
+            if(word[i]==10){
+                continue;
+            }
             word[i] = word[i] + sign;
-            sp=32+sign;
         }
-        cout<<word<<sp;
         file>>word;
 
     }
-    for(int i=0;i<word.length();i++) {
-        word[i] = word[i] + sign;}
-    cout<<word;
     cout<<endl;
     file.close();
+
+    //write the encrypt and decrypt into file
+    file.open(filename,ios::out);
+    file<<word;
+    file.close();
+
 }
 
 //_____________________________
