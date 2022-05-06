@@ -339,13 +339,20 @@ void merge(){
 //_____________________________
 void count_words(){
     file.open(filename, ios::in);
-    string word;
+    char ch;
+    int state = 0;
     int word_counter = 0;
     cin.ignore();
     cin.sync();
     while (!file.eof()) {
-        file >> word;
-        ++word_counter;
+        file.get(ch);
+        if (ch == ' ' || ch == '\n' || ch == '\t') {
+            state = 0;
+        }
+        else if (state == 0) {
+            state = 1;
+            ++word_counter;
+        }
     }
     cout << "Number of words in the file is: " << word_counter << endl;
     file.close();
@@ -369,13 +376,13 @@ void count_chars(){
 //_____________________________
 void count_lines(){
     file.open(filename, ios::in);
-    char word[100];
+    string line;
     int line_counter = 0;
     cin.ignore();
     cin.sync();
     while (!file.eof()) {
-        ++line_counter;
-        file.getline(word, 100); // use \n as a delimiter
+        getline(file, line);
+        ++line_counter; 
     }
     cout << "Number of lines in the file is: " << line_counter << endl;
     file.close();
