@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
-#include <sstream>
 #include <regex>
 
 using namespace std;
@@ -46,10 +45,13 @@ void make_title();
 void main_save();
 void save_recovery_file();
 void save_file_into_new();
+void which_to_keep_editing();
 
 fstream file;
 string str_of_recovery;
 char filename[100];
+char new_file_name[100];
+
 
 int main() {
     cout << "Welcome User!\n";
@@ -58,15 +60,16 @@ int main() {
 
     cout << '\n';
     while(true){
-        cout << "1. Add new text to the end of the file\n"
-                "2. Display the content of the file\n"
-                "3. Empty the file\n"
-                "4. Encrypt the file content\n"
-                "5. Decrypt the file content\n"
-                "6. Merge another file\n"
-                "7. Count the number of words in the file.\n"
-                "8. Count the number of characters in the file\n"
-                "9. Count the number of lines in the file\n"
+
+        cout << " 1. Add new text to the end of the file\n"
+                " 2. Display the content of the file\n"
+                " 3. Empty the file\n"
+                " 4. Encrypt the file content\n"
+                " 5. Decrypt the file content\n"
+                " 6. Merge another file\n"
+                " 7. Count the number of words in the file.\n"
+                " 8. Count the number of characters in the file\n"
+                " 9. Count the number of lines in the file\n"
                 "10. Search for a word in the file\n"
                 "11. Count the number of times a word exists in the file\n"
                 "12. Turn the file content to upper case.\n"
@@ -92,10 +95,12 @@ int main() {
             empty();
         else if(option == "4"){
             encrypt_decrypt(1);
-            cout<<"File encrypted and secured"<<endl;}
+            cout<<"File encrypted and secured"<<endl;
+        }
         else if(option == "5"){
             encrypt_decrypt(-1);
-            cout<<"File decrypted"<<endl;}
+            cout<<"File decrypted"<<endl;
+        }
         else if(option == "6")
             merge();
         else if(option == "7")
@@ -114,11 +119,14 @@ int main() {
             make_lower();
         else if(option == "14")
             make_title();
-        else if(option == "15")
+        else if(option == "15") {
             main_save();
+        }
         else if(option == "16"){
+            cout << "\nLast edits was saved to your file, Thanks for using our app!";
             return 0;
         }
+
 
         cout << "\n_______________________________________________\n\n";
     }
@@ -537,7 +545,6 @@ void save_file_into_new(){
     file.open(filename);
     cout << "Please enter name to save your file with\n>>";
 
-    char new_file_name[100];
     cin >> new_file_name;
 
     fstream new_file;
@@ -563,8 +570,28 @@ void save_file_into_new(){
     new_file.close();
 }
 
+void which_to_keep_editing(){
+    cout << "Which file do you want to keep editing?\n"
+            "1. Stay in the existing old file\n2. Move to the new saved file\n";
+
+    string choice;
+    cin >> choice;
+    while(choice != "1" && choice != "2"){
+        cout << "Please choose a valid option!\n>>";
+        cin >> choice;
+    }
+
+    if(choice == "2"){
+        for(int i = 0; i < 100; ++i) {
+            filename[i] = new_file_name[i];
+        }
+    }
+
+}
+
 void main_save(){
-    cout << "\n1. Save the file's content again in the same file\n2. Save the file's content under a different file name\n>>";
+    cout << "\n1. Save the file's content again in the same file\n"
+            "2. Save the file's content under a different file name\n>>";
 
     string choice;
     cin >> choice;
@@ -579,5 +606,7 @@ void main_save(){
     else if(choice == "2"){
         save_file_into_new();
         save_recovery_file();
+        which_to_keep_editing();
     }
 }
+
