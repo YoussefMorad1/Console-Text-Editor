@@ -3,5 +3,4 @@ project(Assingment4)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Assingment4 main.cpp)
-add_executable(Assignment4_testing testing_functions.cpp)
+add_executable(Assignment4_testing main.cpp library.cpp)
